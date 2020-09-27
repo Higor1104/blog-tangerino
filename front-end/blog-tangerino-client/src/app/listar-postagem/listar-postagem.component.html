@@ -1,0 +1,23 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>Postagens</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Titulo</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let postagem of postagens | async">
+            <td>{{postagem.titulo}}</td>
+            <td>
+                <button (click)="abrirPostagem(postagem.id)" class="btn btn-info" style="margin-left: 10px">Abrir postagem</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
