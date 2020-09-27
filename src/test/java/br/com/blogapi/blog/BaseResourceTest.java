@@ -37,6 +37,7 @@ public class BaseResourceTest {
 	protected String cadadastrarPostagem(String authorization) throws JSONException, Exception, UnsupportedEncodingException {
 		JSONObject cadastroLoginForm = new JSONObject();
 		cadastroLoginForm.put("texto", "Minha primeira postagem");
+		cadastroLoginForm.put("titulo", "Titulo da minha primeira postagem");
 		MvcResult response = mockMvc
 				.perform(MockMvcRequestBuilders.post("/postagem").content(cadastroLoginForm.toString())
 						.contentType(MediaType.APPLICATION_JSON).header(Constantes.AUTHORIZATION_HEADER, authorization))

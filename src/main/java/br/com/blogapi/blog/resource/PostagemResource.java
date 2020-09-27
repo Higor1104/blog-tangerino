@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.blogapi.blog.domain.postagem.PostagemService;
+import br.com.blogapi.blog.infrastructure.persistence.postagem.ConteudoPostagem;
 import br.com.blogapi.blog.infrastructure.persistence.postagem.Postagem;
 import br.com.blogapi.blog.infrastructure.persistence.usuario.Usuario;
 import br.com.blogapi.blog.resource.dto.PostagemRequest;
@@ -32,7 +33,11 @@ public class PostagemResource  extends BaseResource {
 	public ResponseEntity<Long> incluir(@RequestBody @Valid PostagemRequest postagemRequest) {
 		Usuario usuarioAtual = recuperarUsuarioAtual();
 		Postagem postagem = new Postagem();
-		postagem.setTexto(postagemRequest.getTexto());
+		postagem.setTitulo(postagemRequest.getTitulo());
+		ConteudoPostagem conteudoPostagem = new ConteudoPostagem();
+		conteudoPostagem.setTexto(postagemRequest.getTexto());
+		conteudoPostagem.setPostagem(postagem);
+		postagem.setConteudoPostagem(conteudoPostagem);;
 		postagem.setUsuario(usuarioAtual);
 		postagemService.salvar(postagem);
 		return ResponseEntity.ok(postagem.getId());

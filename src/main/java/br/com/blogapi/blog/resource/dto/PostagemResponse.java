@@ -5,6 +5,7 @@ import java.util.List;
 public class PostagemResponse {
 
 	private Long id;
+	private String titulo;
 	private String texto;
 	private List<ComentarioResponse> comentarios;
 
@@ -30,6 +31,14 @@ public class PostagemResponse {
 
 	public void setComentarios(List<ComentarioResponse> comentarios) {
 		this.comentarios = comentarios;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 }

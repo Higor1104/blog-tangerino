@@ -68,7 +68,8 @@ public class PostagemService {
 		List<ComentarioResponse> comentarios = postagem.getComentarios().stream().map(ComentarioResponse::create).collect(Collectors.toList());
 		PostagemResponse postagemResponse = new PostagemResponse();
 		postagemResponse.setId(postagem.getId());
-		postagemResponse.setTexto(postagem.getTexto());
+		postagemResponse.setTitulo(postagem.getTitulo());
+		postagemResponse.setTexto(postagem.getConteudoPostagem().getTexto());
 		postagemResponse.setComentarios(comentarios);
 		return postagemResponse;
 	}

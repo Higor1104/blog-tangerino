@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.blogapi.blog.infrastructure.persistence.comentario.Comentario;
@@ -26,8 +27,11 @@ public class Postagem {
 	@Column(name = "post_id", unique = true)
 	private Long id;
 
-	@Column(name = "post_texto", nullable = false)
-	private String texto;
+	@Column(name = "post_titulo", nullable = false)
+	private String titulo;
+
+	@OneToOne(mappedBy="postagem", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private ConteudoPostagem conteudoPostagem;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "usu_id", nullable = false)
@@ -44,12 +48,20 @@ public class Postagem {
 		this.id = id;
 	}
 
-	public String getTexto() {
-		return texto;
+	public String getTitulo() {
+		return titulo;
 	}
 
-	public void setTexto(String texto) {
-		this.texto = texto;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public ConteudoPostagem getConteudoPostagem() {
+		return conteudoPostagem;
+	}
+
+	public void setConteudoPostagem(ConteudoPostagem conteudoPostagem) {
+		this.conteudoPostagem = conteudoPostagem;
 	}
 
 	public List<Comentario> getComentarios() {
