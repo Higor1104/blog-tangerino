@@ -16,14 +16,19 @@ import br.com.blogapi.blog.infrastructure.persistence.usuario.Usuario;
 @Service
 public class ComentarioService {
 
-	@Autowired
 	private ComentarioRepository comentarioRepository;
-
-	@Autowired
 	private PostagemService postagemService;
+	private UsuarioService usuarioService;
 
 	@Autowired
-	private UsuarioService usuarioService;
+	public ComentarioService(ComentarioRepository comentarioRepository
+			, PostagemService postagemService,
+			UsuarioService usuarioService) {
+		this.comentarioRepository = comentarioRepository;
+		this.postagemService = postagemService;
+		this.usuarioService = usuarioService;
+		
+	}
 
 	public void incluir(Usuario usuarioAtual, Long postId, Comentario comentario) {
 		Usuario usuario = usuarioService.buscarUsuario(usuarioAtual.getId()).get();
