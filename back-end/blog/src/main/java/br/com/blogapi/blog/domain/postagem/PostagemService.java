@@ -61,7 +61,7 @@ public class PostagemService {
 		if (postagens.isEmpty()) {
 			throw new RegistroNaoEncontradoException("Nenhuma Postagem encontrada");
 		}
-		List<PostagemResponse> postagemResponseList = postagens.stream().map(this::convertToPostagemResponse).collect(Collectors.toList());
+		List<PostagemResponse> postagemResponseList = postagens.stream().map(this::convertToPostagemResponseSimples).collect(Collectors.toList());
 		return new PageImpl<PostagemResponse>(postagemResponseList, paginacao, postagemResponseList.size());
 	}
 
@@ -69,12 +69,19 @@ public class PostagemService {
 		Optional<Postagem> postagemO = postagemRepository.findById(id);
 		if (postagemO.isPresent()) {
 			Postagem postagem = postagemO.get();
-			return convertToPostagemResponse(postagem);
+			return convertToPostagemResponseCompleta(postagem);
 		}
 		throw new RegistroNaoEncontradoException("Postagem nao encontrada");
 	}
 
-	private PostagemResponse convertToPostagemResponse(Postagem postagem) {
+	private PostagemResponse convertToPostagemResponseSimples(Postagem postagem) {
+		PostagemResponse postagemResponse = new PostagemResponse();
+		postagemResponse.setId(postagem.getId());
+		postagemResponse.setTitulo(postagem.getTitulo());
+		return postagemResponse;
+	}
+
+	private PostagemResponse convertToPostagemResponseCompleta(Postagem postagem) {
 		List<ComentarioResponse> comentarios = postagem.getComentarios().stream().map(ComentarioResponse::create).collect(Collectors.toList());
 		PostagemResponse postagemResponse = new PostagemResponse();
 		postagemResponse.setId(postagem.getId());
