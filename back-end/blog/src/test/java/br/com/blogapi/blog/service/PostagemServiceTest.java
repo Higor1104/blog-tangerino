@@ -5,13 +5,14 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -126,7 +127,7 @@ public class PostagemServiceTest extends BaseServiceTest {
 		usuario.setId(1L);
 		Postagem postagem = iniciarPostagem(usuario);
 		assertNotNull(postagem.getId());
-		List<PostagemResponse> postagemResponseList = postagemService.buscar(0, 10);
+		Page<PostagemResponse> postagemResponseList = postagemService.buscar("", PageRequest.of(0, 10));
 		assertFalse(postagemResponseList.isEmpty());
 
 		Optional<PostagemResponse> postagemResponseO = postagemResponseList.stream().filter(p -> p.getId().equals(postagem.getId())).findFirst();

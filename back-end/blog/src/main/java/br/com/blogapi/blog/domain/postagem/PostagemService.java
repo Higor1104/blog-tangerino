@@ -7,7 +7,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.blogapi.blog.application.exception.RegistroNaoEncontradoException;
@@ -55,13 +56,13 @@ public class PostagemService {
 		return postagemRepository.findById(postId);
 	}
 
-	public List<PostagemResponse> buscar(Integer page, Integer size) {
-		Page<Postagem> postagens = postagemRepository.findAll(PageRequest.of(page, size));
+	public Page<PostagemResponse> buscar(String texto, Pageable paginacao) {
+		Page<Postagem> postagens = postagemRepository.findByTexto(texto, paginacao);
 		if (postagens.isEmpty()) {
 			throw new RegistroNaoEncontradoException("Nenhuma Postagem encontrada");
 		}
 		List<PostagemResponse> postagemResponseList = postagens.stream().map(this::convertToPostagemResponse).collect(Collectors.toList());
-		return postagemResponseList;
+		return new PageImpl<PostagemResponse>(postagemResponseList, paginacao, postagemResponseList.size());
 	}
 
 	public PostagemResponse buscar(Long id) {
