@@ -17,6 +17,7 @@ export class ListarPostagemComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.reloadData();
   }
 
   reloadData() {
