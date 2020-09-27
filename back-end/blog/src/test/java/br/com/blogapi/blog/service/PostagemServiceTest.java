@@ -2,6 +2,7 @@ package br.com.blogapi.blog.service;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -136,10 +137,9 @@ public class PostagemServiceTest extends BaseServiceTest {
 		PostagemResponse postagemResponse = postagemResponseO.get();
 		assertEquals(postagem.getId(), postagemResponse.getId());
 		assertEquals(postagem.getTitulo(), postagemResponse.getTitulo());
-		assertEquals(postagem.getConteudoPostagem().getTexto(), postagemResponse.getTexto());
 		assertEquals(postagem.getId(), postagemResponse.getId());
 		assertEquals(postagem.getTitulo(), postagemResponse.getTitulo());
-		assertEquals(postagem.getConteudoPostagem().getTexto(), postagemResponse.getTexto());
+		assertNull(postagemResponse.getTexto());
 	}
 
 }

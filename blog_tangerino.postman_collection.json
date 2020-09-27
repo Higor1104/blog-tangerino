@@ -292,7 +292,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{local}}/postagem/1/comentario/2",
+					"raw": "{{local}}/postagem/1/comentario/1",
 					"host": [
 						"{{local}}"
 					],
@@ -300,7 +300,7 @@
 						"postagem",
 						"1",
 						"comentario",
-						"2"
+						"1"
 					]
 				}
 			},
