@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +35,7 @@ public class Postagem {
 	private ConteudoPostagem conteudoPostagem;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "usu_id", nullable = false)
+	@JoinColumn(name = "usu_id", nullable = false, foreignKey=@ForeignKey(name = "fk_postagem_usuario"))
 	private Usuario usuario;
 
 	@OneToMany(mappedBy="postagem", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

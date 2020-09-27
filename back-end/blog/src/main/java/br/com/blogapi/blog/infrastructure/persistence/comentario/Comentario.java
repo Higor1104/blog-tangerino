@@ -3,6 +3,7 @@ package br.com.blogapi.blog.infrastructure.persistence.comentario;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,11 +27,11 @@ public class Comentario {
 	private String texto;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "usu_id", nullable = false)
+	@JoinColumn(name = "usu_id", nullable = false, foreignKey=@ForeignKey(name = "fk_postagem_usuario"))
 	private Usuario usuario;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "post_id", nullable = false)
+	@JoinColumn(name = "post_id", nullable = false, foreignKey=@ForeignKey(name = "fk_postagem_comentario"))
 	private Postagem postagem;
 
 	public Long getId() {

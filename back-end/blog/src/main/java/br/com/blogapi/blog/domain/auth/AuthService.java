@@ -20,14 +20,20 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class AuthService implements UserDetailsService {
 
-	@Value("${jwt.secret}")
 	private String jwtSecret;
 
-	@Value("${jwt.expiration}")
 	private String jwtExpiration;
 
-	@Autowired
 	private UsuarioRepository repository;
+
+	@Autowired
+	public AuthService(@Value("${jwt.secret}") String jwtSecret,
+			@Value("${jwt.expiration}") String jwtExpiration,
+			UsuarioRepository repository) {
+		this.jwtSecret = jwtSecret;
+		this.jwtExpiration = jwtExpiration;
+		this.repository = repository;
+	}
 
 	@Override
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
@@ -59,8 +65,12 @@ public class AuthService implements UserDetailsService {
 	}
 
 	public Optional<Usuario> obterUsuario(String token) {
+		if (!isTokenValido(token)) {
+			return Optional.empty();
+		}
 		Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
 		Long idUsuario = Long.parseLong(claims.getSubject());
 		return repository.findById(idUsuario);
 	}
+
 }

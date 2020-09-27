@@ -1,6 +1,6 @@
 package br.com.blogapi.blog.service;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Optional;
@@ -26,6 +26,19 @@ public class UsuarioServiceTest {
 	public UsuarioServiceTest(UsuarioRepository usuarioRepository) {
 		this.usuarioService = new UsuarioService(usuarioRepository);
 	}
+
+	@Test
+	public void deveBuscarUsuario() throws CadastroUsuarioException {
+		Optional<Usuario> usuarioO = usuarioService.buscarUsuario(1L);
+		assertTrue(usuarioO.isPresent());
+	}
+
+	@Test
+	public void naoDeveBuscarUsuario() throws CadastroUsuarioException {
+		Optional<Usuario> usuarioO = usuarioService.buscarUsuario(100000000L);
+		assertFalse(usuarioO.isPresent());
+	}
+
 	@Test
 	public void deveCriarUsuario() throws CadastroUsuarioException {
 		Usuario usuario = new Usuario();
@@ -39,13 +52,16 @@ public class UsuarioServiceTest {
 
 	@Test
 	public void naoDeveCriarUsuario() {
+		boolean usuarioCriado = false;
 		Usuario usuario = new Usuario();
 		usuario.setLogin("teste.higor");
 		usuario.setSenha("1233456");
 		try {
 			usuarioService.salvar(usuario);
-			assertNull(usuario.getId());
+			usuarioCriado = true;
 		} catch (CadastroUsuarioException e) {
+			usuarioCriado = false;
 		}
+		assertFalse(usuarioCriado);
 	}
 }
