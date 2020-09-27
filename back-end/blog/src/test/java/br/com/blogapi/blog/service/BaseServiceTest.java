@@ -17,7 +17,7 @@ public class BaseServiceTest {
 		postagem.setConteudoPostagem(conteudoPostagem);
 		postagem.setUsuario(usuario);
 		conteudoPostagem.setPostagem(postagem);
-		postagemService.salvar(postagem);
+		postagemService.salvar(usuario, postagem);
 		return postagem;
 	}
 

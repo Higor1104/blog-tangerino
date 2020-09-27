@@ -3,6 +3,7 @@ package br.com.blogapi.blog.domain.usuario;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,7 @@ public class UsuarioService {
 		}
 	}
 
+	@Cacheable(value = "Usuario.ID")
 	public Optional<Usuario> buscarUsuario(Long id) {
 		return usuarioRepository.findById(id);
 	}

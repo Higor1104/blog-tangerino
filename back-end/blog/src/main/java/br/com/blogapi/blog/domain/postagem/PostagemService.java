@@ -41,8 +41,8 @@ public class PostagemService {
 		throw new RegistroNaoEncontradoException("Postagem nao encontrada");
 	}
 
-	public void salvar(Postagem postagem) {
-		Optional<Usuario> usuarioO = usuarioService.buscarUsuario(postagem.getUsuario().getId());
+	public void salvar(Usuario usuario, Postagem postagem) {
+		Optional<Usuario> usuarioO = usuarioService.buscarUsuario(usuario.getId());
 		if (usuarioO.isPresent()) {
 			postagem.setUsuario(usuarioO.get());
 			postagemRepository.save(postagem);

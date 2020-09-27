@@ -71,7 +71,7 @@ public class PostagemServiceTest extends BaseServiceTest {
 		postagem.setTitulo("Postagem 1");
 		postagem.setUsuario(usuario);
 		try {
-			postagemService.salvar(postagem);
+			postagemService.salvar(usuario, postagem);
 		} catch (RegistroNaoEncontradoException e) {
 			postagemCriada = false;
 		}

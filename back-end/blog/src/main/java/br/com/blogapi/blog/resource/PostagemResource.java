@@ -31,15 +31,13 @@ public class PostagemResource  extends BaseResource {
 
 	@PostMapping
 	public ResponseEntity<Long> incluir(@RequestBody @Valid PostagemRequest postagemRequest) {
-		Usuario usuarioAtual = recuperarUsuarioAtual();
 		Postagem postagem = new Postagem();
 		postagem.setTitulo(postagemRequest.getTitulo());
 		ConteudoPostagem conteudoPostagem = new ConteudoPostagem();
 		conteudoPostagem.setTexto(postagemRequest.getTexto());
 		conteudoPostagem.setPostagem(postagem);
 		postagem.setConteudoPostagem(conteudoPostagem);;
-		postagem.setUsuario(usuarioAtual);
-		postagemService.salvar(postagem);
+		postagemService.salvar(recuperarUsuarioAtual(), postagem);
 		return ResponseEntity.ok(postagem.getId());
 	}
 

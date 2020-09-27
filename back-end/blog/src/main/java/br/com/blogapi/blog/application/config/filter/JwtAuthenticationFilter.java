@@ -54,7 +54,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 					usuario.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 		} else {
-			throw new TokenInvalidoException("Token inválido");
+			throw new TokenInvalidoException("Token invalido");
 		}
 	}
 
