@@ -21,11 +21,16 @@ import br.com.blogapi.blog.resource.dto.PostagemResponse;
 @Service
 public class PostagemService {
 
-	@Autowired
 	private PostagemRepository postagemRepository;
 
-	@Autowired
 	private UsuarioService usuarioService;
+
+	@Autowired
+	public PostagemService(PostagemRepository postagemRepository,
+			UsuarioService usuarioService) {
+		this.postagemRepository = postagemRepository;
+		this.usuarioService = usuarioService;
+	}
 
 	public void deletar(Long id, Usuario usuarioAtual) {
 		Optional<Postagem> postagemO = postagemRepository.findByIdAndUsuario(id, usuarioAtual);
@@ -38,8 +43,12 @@ public class PostagemService {
 
 	public void salvar(Postagem postagem) {
 		Optional<Usuario> usuarioO = usuarioService.buscarUsuario(postagem.getUsuario().getId());
-		postagem.setUsuario(usuarioO.get());
-		postagemRepository.save(postagem);
+		if (usuarioO.isPresent()) {
+			postagem.setUsuario(usuarioO.get());
+			postagemRepository.save(postagem);
+		} else {
+			throw  new RegistroNaoEncontradoException("Usuario nao encontrado");
+		}
 	}
 
 	public Optional<Postagem> buscarPostagem(Long postId) {

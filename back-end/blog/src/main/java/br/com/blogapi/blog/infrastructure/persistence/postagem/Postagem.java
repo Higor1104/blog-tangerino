@@ -1,5 +1,6 @@
 package br.com.blogapi.blog.infrastructure.persistence.postagem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -39,7 +40,7 @@ public class Postagem {
 	private Usuario usuario;
 
 	@OneToMany(mappedBy="postagem", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Comentario> comentarios;
+	private List<Comentario> comentarios = new ArrayList<>();
 
 	public Long getId() {
 		return id;
