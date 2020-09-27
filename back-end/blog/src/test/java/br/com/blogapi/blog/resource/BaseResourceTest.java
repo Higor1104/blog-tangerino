@@ -1,4 +1,4 @@
-package br.com.blogapi.blog;
+package br.com.blogapi.blog.resource;
 
 import java.io.UnsupportedEncodingException;
 

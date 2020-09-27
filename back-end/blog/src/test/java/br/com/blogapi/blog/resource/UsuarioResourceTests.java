@@ -1,4 +1,4 @@
-package br.com.blogapi.blog;
+package br.com.blogapi.blog.resource;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import br.com.blogapi.blog.BlogApplication;
 import br.com.blogapi.blog.domain.Constantes;
 
 @SpringBootTest(classes = BlogApplication.class)

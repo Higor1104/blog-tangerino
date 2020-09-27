@@ -13,9 +13,12 @@ import br.com.blogapi.blog.infrastructure.persistence.usuario.UsuarioRepository;
 @Service
 public class UsuarioService {
 
-	@Autowired
 	private UsuarioRepository usuarioRepository;
 
+	@Autowired
+	public UsuarioService(UsuarioRepository usuarioRepository) {
+		this.usuarioRepository = usuarioRepository;	
+	}
 	public void salvar(Usuario usuario) throws CadastroUsuarioException {
 		validarCadastroUsuario(usuario);
 		usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
