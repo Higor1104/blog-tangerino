@@ -1,0 +1,13 @@
+.metadata
+bin/
+tmp/
+*.tmp
+*.class
+.settings/
+.loadpath
+.factorypath
+.buildpath
+.target
+.project
+/target/
+/.classpath
