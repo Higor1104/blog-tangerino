@@ -1,5 +1,5 @@
-import { PostagemService } from "../postagem.service";
-import { Postagem } from "../postagem";
+import { PostagemService } from "../services/postagem.service";
+import { Postagem } from "../models/postagem";
 import { Observable } from "rxjs";
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';

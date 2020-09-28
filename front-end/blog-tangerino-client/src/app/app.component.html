@@ -3,8 +3,8 @@
   <ul class="navbar-nav">
     <li class="nav-item">
         <a routerLink="" class="nav-link" routerLinkActive="active">Home</a>
-        <a routerLink="addUsuario" class="nav-link" routerLinkActive="active">Cadastrar usuário</a>
-        <a routerLink="listarPostagens" class="nav-link" routerLinkActive="active">Listar Postagens</a>
+        <a routerLink="listarPostagens" class="nav-link" routerLinkActive="active" *ngIf="currentUser">Listar Postagens</a>
+        <a class="nav-item nav-link" (click)="logout()" *ngIf="currentUser">Logout</a>
     </li>
   </ul>
 </nav>

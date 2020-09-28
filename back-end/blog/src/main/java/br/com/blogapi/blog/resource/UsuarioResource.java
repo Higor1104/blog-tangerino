@@ -4,7 +4,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +19,7 @@ import br.com.blogapi.blog.domain.auth.LoginForm;
 import br.com.blogapi.blog.domain.usuario.UsuarioService;
 import br.com.blogapi.blog.infrastructure.persistence.usuario.Usuario;
 import br.com.blogapi.blog.resource.dto.UsuarioRequest;
+import br.com.blogapi.blog.resource.dto.UsuarioResponse;
 
 @RestController
 @RequestMapping(value = "/usuario")
@@ -47,9 +47,7 @@ public class UsuarioResource {
 	public ResponseEntity<?> login(@RequestBody @Valid LoginForm loginForm) {
 		Authentication authentication = authManager.authenticate(loginForm.createAutenticator());
 		String token = authService.gerarToken(authentication);
-		BodyBuilder ok = ResponseEntity.ok();
-		ok.header(Constantes.AUTHORIZATION_HEADER, Constantes.BEARER_PREFIX.concat(token));
-		return ok.build();
+		return ResponseEntity.ok().header(Constantes.AUTHORIZATION_HEADER, Constantes.BEARER_PREFIX.concat(token)).body(UsuarioResponse.create(authentication, token));
 	}
 
 }
