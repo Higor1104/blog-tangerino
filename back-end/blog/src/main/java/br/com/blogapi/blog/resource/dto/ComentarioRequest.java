@@ -1,10 +1,11 @@
 package br.com.blogapi.blog.resource.dto;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 public class ComentarioRequest {
 
-	@NotBlank
+	@NotBlank@Min(value = 10)
 	public String texto;
 
 	public String getTexto() {

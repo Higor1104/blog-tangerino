@@ -1,13 +1,14 @@
 package br.com.blogapi.blog.resource.dto;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 public class PostagemRequest {
 
-	@NotBlank
+	@NotBlank@Min(value = 10)
 	public String titulo;
 
-	@NotBlank
+	@NotBlank@Min(value = 10)
 	public String texto;
 
 	public String getTitulo() {

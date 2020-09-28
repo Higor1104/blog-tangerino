@@ -1,12 +1,13 @@
 package br.com.blogapi.blog.resource.dto;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 public class UsuarioRequest {
 
-	@NotBlank
+	@NotBlank@Min(value = 6)
 	private String login;
-	@NotBlank
+	@NotBlank@Min(value = 6)
 	private String senha;
 
 	public String getLogin() {
