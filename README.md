@@ -3,6 +3,7 @@ Desenvolvi a parte do back-end com mais assertividade, porém a parte do front e
 
 O modelo de dados ficou da seguinte forma:
 
+![alt text](database_model.png "Modelo de dados")
 
 #### Back-end
 Para executar os testes, abrir a pasta ./back-end/blog/ no terminal e executar o comando abaixo:
