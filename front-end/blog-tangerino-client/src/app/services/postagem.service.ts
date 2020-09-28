@@ -11,11 +11,11 @@ export class PostagemService {
   constructor(private http: HttpClient) { }
 
   createPostagem(postagem: Postagem): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, postagem);
+    return this.http.post(this.baseUrl, postagem);
   }
 
-  getPostagens(size: number, page: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
+  getPostagens(size: number, page: number): Observable<Object> {
+    return this.http.get(this.baseUrl);
   }
 
 }

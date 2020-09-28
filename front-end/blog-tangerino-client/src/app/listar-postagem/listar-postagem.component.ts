@@ -21,7 +21,8 @@ export class ListarPostagemComponent implements OnInit {
   }
 
   reloadData() {
-    this.postagens = this.postagemService.getPostagens(10, 0);
+    //this.postagens = 
+    var postagens = this.postagemService.getPostagens(10, 0);
   }
 
   detalharPostagem(id: number){

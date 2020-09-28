@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { ErrorInterceptor } from './utils/error.interceptor';
+import { CadastrarPostagemComponent } from './cadastrar-postagem/cadastrar-postagem.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { ErrorInterceptor } from './utils/error.interceptor';
     CadastroUsuarioComponent,
     HomeComponent,
     ListarPostagemComponent,
-    DetalharPostagemComponent
+    DetalharPostagemComponent,
+    CadastrarPostagemComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
